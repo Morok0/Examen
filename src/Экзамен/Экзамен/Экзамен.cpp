@@ -48,25 +48,37 @@ public:
 		cout << "Введите количество записей" << endl;
 		cin >> buf;
 		num_papers = buf;
-		for (int i = 0; i <= buf; i++)
+		if (buf == NULL)
 		{
-			for (int i = 0; i < num_papers; i++) {
-				if (papers[i] == NULL) {
-					//идёт сохранение указателей экземпляра газеты в массив 
-					//перед этим ишется первый пустой элемент массива
-					cout << "Введите название газеты" << endl;
-					cin >> title;
-					cout << "Введите название компании" << endl;
-					cin >> owner;
-					cout << "Введите количество страниц" << endl;
-					cin >> pages;
-					papers[i] = new Newspaper;
-					papers[i]->title = title;
-					papers[i]->owner = owner;
-					papers[i]->pages = pages;
-					break;
+			cout << "размер вводится положительной не дробной цифрой";
+			
+		}
+		else {
+
+
+			for (int i = 0; i <= buf; i++)
+			{
+				for (int i = 0; i < num_papers; i++) {
+					if (papers[i] == NULL) {
+						//идёт сохранение указателей экземпляра газеты в массив 
+						//перед этим ишется первый пустой элемент массива
+						cout << "Введите название газеты" << endl;
+						cin >> title;
+						cout << "Введите название компании" << endl;
+						cin >> owner;
+						cout << "Введите количество страниц" << endl;
+						cin >> pages;
+						papers[i] = new Newspaper;
+						papers[i]->title = title;
+						papers[i]->owner = owner;
+						papers[i]->pages = pages;
+						break;
+					}
+					cout << "Запись успешно добавлена в массив" << endl;
 				}
+				
 			}
+			cout << "Запись успешно добавлена";
 		}
 	}
 	// просто сортировка
