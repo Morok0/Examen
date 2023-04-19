@@ -3,7 +3,6 @@
 #include <string>
 
 using namespace std;
-
 struct Newspaper {
 	string title;
 	string owner;
@@ -41,17 +40,45 @@ public:
 		delete[] papers;
 	}
 	// добавление газеты
-	void addNewspaper(string title, string owner, int pages) {
-	
-		for (int i = 0; i < num_papers; i++) {
-			if (papers[i] == NULL) {
-				//идёт сохранение указателей экземпляра газеты в массив 
-				//перед этим ишется первый пустой элемент массива
-				papers[i] = new Newspaper;
-			    papers[i]->title = title;
-				papers[i]->owner = owner;
-				papers[i]->pages = pages;
-				break;
+	void addNewspaper() {
+		string title;
+		string owner;
+		int pages;
+		int buf;
+		cout << "Введите количество записей" << endl;
+		cin >> buf;
+		num_papers = buf;
+		for (int i = 0; i <= buf; i++)
+		{
+			for (int i = 0; i < num_papers; i++) {
+				if (papers[i] == NULL) {
+					//идёт сохранение указателей экземпляра газеты в массив 
+					//перед этим ишется первый пустой элемент массива
+					cout << "Введите название газеты" << endl;
+					cin >> title;
+					cout << "Введите название компании" << endl;
+					cin >> owner;
+					cout << "Введите количество страниц" << endl;
+					cin >> pages;
+					papers[i] = new Newspaper;
+					papers[i]->title = title;
+					papers[i]->owner = owner;
+					papers[i]->pages = pages;
+					break;
+				}
+			}
+		}
+	}
+	// просто сортировка
+	void sortNewspapers() {
+		for (int i = 0; i < num_papers - 1; i++) {
+			for (int j = i + 1; j < num_papers; j++) {
+				if (papers[i]->pages > papers[j]->pages)
+				{
+					Newspaper* temp = papers[i];
+					papers[i] = papers[j];
+					papers[j] = temp;
+				}
 			}
 		}
 	}
@@ -70,6 +97,9 @@ public:
 	}
 };
 int main() {
-	
+	setlocale(LC_ALL, "Russian");
+	PostBox postbox(5);
+	postbox.addNewspaper();
+	postbox.saveToFile("newspapers.txt");
 	return 0;
 }
